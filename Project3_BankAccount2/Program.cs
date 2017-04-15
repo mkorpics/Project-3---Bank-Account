@@ -72,11 +72,11 @@ namespace Project3_BankAccount2
 
                             if (userOption == 1)
                             {
-                                checking.DisplayBalanceChecking();
+                                checking.DisplayBalance();
                             }
                             else if (userOption == 2)
                             {
-                                savings.DisplayBalanceSavings(savings);
+                                savings.DisplayBalance();
                             }
                             else
                             {

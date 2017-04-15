@@ -20,13 +20,23 @@ namespace Project3_BankAccount2
         //constructors
         public Savings()
         {
-            this.accountNumber = "2132342"; //random?
-            this.balance = 1500.00; // random?
+            this.accountNumber = BankAccountNumberSavings();
+            this.balance = random.Next(999999);
             this.accountType = "Savings";
             this.minimumBalance = 100; //what should this number be?
         }
 
         //methods
+
+        public override void DisplayBalance()
+        {
+            Console.WriteLine("\r\n\r\n\tAccount Type: " + accountType.ToUpper());
+            Console.WriteLine("\r\n\tAccount Number: " + accountNumber);
+            Console.WriteLine("\r\n\tBalance: " + BalanceFormat(balance));
+            Console.WriteLine("\r\n\tMinimum Balance: " + minimumBalance);
+            Console.WriteLine();
+        }
+
         public override void Withdraw()
         {
 
@@ -59,6 +69,8 @@ namespace Project3_BankAccount2
 
             DisplayNewBalance();
         }
+
+
 
     }
 }

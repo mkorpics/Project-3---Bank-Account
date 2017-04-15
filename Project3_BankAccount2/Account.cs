@@ -10,19 +10,61 @@ namespace Project3_BankAccount2
     {
         //fields
         protected string accountNumber;
+        protected string routingNumber;
         protected double balance;
         protected string accountType;
+        protected Random random = new Random();
 
         //properties?
 
-        //default constructor
+        //constructor
         public Account()
         {
-
+            this.routingNumber = BankRoutingNumber();
         }
 
         //methods
-        
+
+        //Generates random 11-digit number for bank account #
+        public string BankAccountNumberChecking()
+        {
+            string accountNumber = "";
+
+            for (int i = 0; i < 11; i++)
+            {
+                accountNumber += random.Next(0, 9).ToString();
+            }
+
+            return accountNumber;
+        }
+
+        public string BankAccountNumberSavings()
+        {
+            string accountNumber = "";
+
+            for (int i = 0; i < 11; i++)
+            {
+                System.Threading.Thread.Sleep(4000);
+                accountNumber += random.Next(0, 9).ToString();
+            }
+
+            return accountNumber;
+        }
+
+        //Generates random 9-digit number for bank routing #
+        public static string BankRoutingNumber()
+        {
+            Random random = new Random();
+            string routingNumber = "";
+
+            for (int i = 0; i < 9; i++)
+            {
+                routingNumber += random.Next(0, 9).ToString();
+            }
+
+            return routingNumber;
+        }
+
         //formats balance in $ currency
         public string BalanceFormat(double balance)
         {
@@ -32,22 +74,8 @@ namespace Project3_BankAccount2
             return balanceFormat;
         }
 
-        public void DisplayBalanceChecking()
-        {
-            Console.WriteLine("\r\n\r\n\tAccount Type: " + accountType.ToUpper());
-            Console.WriteLine("\r\n\tAccount Number: " + accountNumber);
-            Console.WriteLine("\r\n\tBalance: " + BalanceFormat(balance));
-            Console.WriteLine();
-        }
 
-        public void DisplayBalanceSavings(Savings savings)
-        {
-            Console.WriteLine("\r\n\r\n\tAccount Type: " + accountType.ToUpper());
-            Console.WriteLine("\r\n\tAccount Number: " + accountNumber);
-            Console.WriteLine("\r\n\tBalance: " + BalanceFormat(balance));
-            Console.WriteLine("\r\n\tMinimum Balance: " + savings.MinimumBalance);
-            Console.WriteLine();
-        }
+        public abstract void DisplayBalance();
 
         //display balance after transaction
         public void DisplayNewBalance()
@@ -83,6 +111,9 @@ namespace Project3_BankAccount2
             Console.WriteLine("\r\n\r\n\r\n\tLast Name: " + client.LastName);
             Console.WriteLine("\r\n\tFirst Name: " + client.FirstName);
             Console.WriteLine("\r\n\tUsername: " + client.UserName);
+            Console.WriteLine();
+
+            Console.WriteLine("\r\n\tBank Routing Number: " + routingNumber);
             Console.WriteLine();
 
             Console.WriteLine("\r\n\tAccount Type: " + checking.accountType.ToUpper());
