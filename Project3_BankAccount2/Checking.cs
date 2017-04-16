@@ -36,7 +36,9 @@ namespace Project3_BankAccount2
             DisplayBalance();
 
             Console.Write("\r\n\r\nAmount of withdrawal: \t");
-            double withdrawal = double.Parse(Console.ReadLine());
+            string withdrawalInput = Console.ReadLine();
+
+            double withdrawal = FilterInput(withdrawalInput);
 
             this.balance -= withdrawal;
 
