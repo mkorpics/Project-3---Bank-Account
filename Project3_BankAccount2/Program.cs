@@ -40,7 +40,8 @@ namespace Project3_BankAccount2
                 Console.WriteLine("\r\n\t2. View Account Balance");
                 Console.WriteLine("\r\n\t3. Deposit Funds");
                 Console.WriteLine("\r\n\t4. Withdraw Funds");
-                Console.WriteLine("\r\n\t5. Exit");
+                Console.WriteLine("\r\n\t5. Log in as New User");
+                Console.WriteLine("\r\n\t6. Exit");
 
                 Console.Write("\r\n\r\n>  ");
                 userResponse = Console.ReadLine();
@@ -123,11 +124,28 @@ namespace Project3_BankAccount2
 
                         break;
                     
-                    //exit
+                    //log in as new user
                     case 5:
-                        Exit();
+
+                        Console.WriteLine("\r\n\r\nThank you for visiting.");
+                        System.Threading.Thread.Sleep(1500);
+                        Console.Clear();
+
+                        Console.WriteLine("\r\n\r\nTo view your account, please enter your name and username.");
+                        Console.WriteLine();
+
+                        client.GetClientInfo();
+
                         break;
-                    
+
+                    //exit
+                    case 6:
+
+                        Console.WriteLine("\r\n\r\nThank you for your visit.");
+                        System.Threading.Thread.Sleep(1500);
+
+                        break;
+
                     //number outside range
                     default:
                         Console.WriteLine("\r\n\r\nI'm sorry that is not valid input.");
@@ -137,48 +155,10 @@ namespace Project3_BankAccount2
                 Console.WriteLine("\r\n\r\n");
                 PressAndClear();
 
-                //give user option to continue or exit
-                Console.WriteLine("\r\nWould you like to return to the menu?");
-                Console.WriteLine("\r\n1. Return to menu");
-                Console.WriteLine("\r\n2. Log in to another account");
-                Console.WriteLine("\r\n3. Exit");
-
-                Console.Write("\r\n\r\n>  ");
-
-                userResponse = Console.ReadLine();
-                userOption = FilterInput(userResponse);
-
-
-                if (userOption == 2)
-                {
-                    Console.WriteLine("\r\n\r\nThank you for visiting.");
-                    System.Threading.Thread.Sleep(1500);
-                    Console.Clear();
-
-                    Console.WriteLine("\r\n\r\nTo view your account, please enter your name and username.");
-                    Console.WriteLine();
-
-                    client.GetClientInfo();
-
-                    Console.Clear();
-                }
-                else if (userOption == 3)
-                {
-                    Console.WriteLine("\r\n\r\nThank you for your visit.");
-                    System.Threading.Thread.Sleep(1500);
-                }
-
-                else
-                { }
-
-                Console.Clear();
-
-            } while (userOption != 3); 
+            } while (userOption != 6);
 
 
         }
-
-
 
 
         //METHODS
