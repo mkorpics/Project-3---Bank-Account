@@ -10,162 +10,170 @@ namespace Project3_BankAccount2
     {
         static void Main(string[] args)
         {
+            //instantiate objects
+            Client client = new Client();
+            Savings savings = new Savings();
+            Checking checking = new Checking();
+
+            Console.WriteLine();
+
+            string welcome = "Welcome!";
+            Console.SetCursorPosition((Console.WindowWidth - welcome.Length) / 2, Console.CursorTop);
+            Console.WriteLine(welcome);
+
+            Console.WriteLine("\r\n\r\nTo view your account, please enter your name and username.");
+            Console.WriteLine();
+
+            client.GetClientInfo();
+
+            Console.Clear();
+
             //declare variables
             string userResponse;
             int userOption;
 
             do
             {
-                //instantiate objects
-                Client client = new Client();
-                Savings savings = new Savings();
-                Checking checking = new Checking();
+                //display menu
+                Console.WriteLine("\r\nPlease select an option: ");
+                Console.WriteLine("\r\n\r\n\t1. View Client Information");
+                Console.WriteLine("\r\n\t2. View Account Balance");
+                Console.WriteLine("\r\n\t3. Deposit Funds");
+                Console.WriteLine("\r\n\t4. Withdraw Funds");
+                Console.WriteLine("\r\n\t5. Exit");
 
-                Console.WriteLine();
+                Console.Write("\r\n\r\n>  ");
+                userResponse = Console.ReadLine();
 
-                string welcome ="Welcome!";
-                Console.SetCursorPosition((Console.WindowWidth - welcome.Length) / 2, Console.CursorTop);
-                Console.WriteLine(welcome);
-
-                Console.WriteLine("\r\n\r\nTo view your account, please enter your name and username.");
-                Console.WriteLine();
-
-                client.GetClientInfo();
+                userOption = FilterInput(userResponse);
 
                 Console.Clear();
 
-                ////declare variables
-                //string userResponse;
-                //int userOption;
-
-                do
+                switch (userOption)
                 {
-                    //display menu
-                    Console.WriteLine("\r\nPlease select an option: ");
-                    Console.WriteLine("\r\n\r\n\t1. View Client Information");
-                    Console.WriteLine("\r\n\t2. View Account Balance");
-                    Console.WriteLine("\r\n\t3. Deposit Funds");
-                    Console.WriteLine("\r\n\t4. Withdraw Funds");
-                    Console.WriteLine("\r\n\t5. Exit");
+                    //view client info
+                    case 1:
+                        Console.WriteLine("\r\n\r\nYour Profile:");
+                        checking.PrintClientInfo(client, savings, checking);
+                        break;
 
-                    Console.Write("\r\n\r\n>  ");
-                    userResponse = Console.ReadLine();
+                    //view account balance
+                    case 2:
 
-                    userOption = FilterInput(userResponse);
+                        userOption = SelectAccount();
 
+                        Console.Clear();
+
+                        if (userOption == 1)
+                        {
+                            checking.DisplayBalance();
+                        }
+                        else if (userOption == 2)
+                        {
+                            savings.DisplayBalance();
+                        }
+                        else
+                        {
+                            Console.WriteLine("\r\n\r\nI'm sorry that's not a valid option.");
+                        }
+
+                        break;
+
+                    //deposit funds
+                    case 3:
+
+                        userOption = SelectAccount();
+
+                        Console.Clear();
+
+                        if (userOption == 1)
+                        {
+                            checking.Deposit();
+                        }
+                        else if (userOption == 2)
+                        {
+                            savings.Deposit();
+                        }
+                        else
+                        {
+                            Console.WriteLine("\r\n\r\nI'm sorry that's not a valid option.");
+                        }
+
+                        break;
+
+                    //withdraw funds
+                    case 4:
+
+                        userOption = SelectAccount();
+
+                        Console.Clear();
+
+                        if (userOption == 1)
+                        {
+                            checking.Withdraw();
+                        }
+                        else if (userOption == 2)
+                        {
+                            savings.Withdraw();
+                        }
+                        else
+                        {
+                            Console.WriteLine("\r\n\r\nI'm sorry that's not a valid option.");
+                        }
+
+                        break;
+
+                    case 5:
+                        Exit();
+                        break;
+
+                    default:
+                        Console.WriteLine("\r\n\r\nI'm sorry that is not valid input.");
+                        break;
+                }
+
+                Console.WriteLine("\r\n\r\n");
+                PressAndClear();
+
+                //give user option to continue or exit
+                Console.WriteLine("\r\nWould you like to return to the menu?");
+                Console.WriteLine("\r\n1. Return to menu");
+                Console.WriteLine("\r\n2. Log in to another account");
+                Console.WriteLine("\r\n3. Exit");
+
+                Console.Write("\r\n\r\n>  ");
+
+                userResponse = Console.ReadLine();
+                userOption = FilterInput(userResponse);
+
+
+                if (userOption == 2)
+                {
+                    Console.WriteLine("\r\n\r\nThank you for visiting.");
+                    System.Threading.Thread.Sleep(1500);
                     Console.Clear();
 
-                    switch (userOption)
-                    {
-                        //view client info
-                        case 1:
-                            Console.WriteLine("\r\n\r\nYour Profile:");
-                            checking.PrintClientInfo(client, savings, checking);
-                            break;
+                    Console.WriteLine("\r\n\r\nTo view your account, please enter your name and username.");
+                    Console.WriteLine();
 
-                        //view account balance
-                        case 2:
-
-                            userOption = SelectAccount();
-
-                            Console.Clear();
-
-                            if (userOption == 1)
-                            {
-                                checking.DisplayBalance();
-                            }
-                            else if (userOption == 2)
-                            {
-                                savings.DisplayBalance();
-                            }
-                            else
-                            {
-                                Console.WriteLine("\r\n\r\nI'm sorry that's not a valid option.");
-                            }
-
-                            break;
-
-                        //deposit funds
-                        case 3:
-
-                            userOption = SelectAccount();
-
-                            Console.Clear();
-
-                            if (userOption == 1)
-                            {
-                                checking.Deposit();
-                            }
-                            else if (userOption == 2)
-                            {
-                                savings.Deposit();
-                            }
-                            else
-                            {
-                                Console.WriteLine("\r\n\r\nI'm sorry that's not a valid option.");
-                            }
-
-                            break;
-
-                        //withdraw funds
-                        case 4:
-
-                            userOption = SelectAccount();
-
-                            Console.Clear();
-
-                            if (userOption == 1)
-                            {
-                                checking.Withdraw();
-                            }
-                            else if (userOption == 2)
-                            {
-                                savings.Withdraw();
-                            }
-                            else
-                            {
-                                Console.WriteLine("\r\n\r\nI'm sorry that's not a valid option.");
-                            }
-
-                            break;
-
-                        case 5:
-                            Exit();
-                            break;
-
-                        default:
-                            Console.WriteLine("\r\n\r\nI'm sorry that is not valid input.");
-                            break;
-                    }
-
-                    Console.WriteLine("\r\n\r\n");
-                    PressAndClear();
-
-                    //give user option to continue or exit
-                    Console.WriteLine("\r\nWould you like to return to the menu?");
-                    Console.WriteLine("\r\n1. Return to menu");
-                    Console.WriteLine("\r\n2. Exit");
-                    Console.WriteLine("\r\n3. Log in to another account");
-
-                    Console.Write("\r\n\r\n>  ");
-
-                    userResponse = Console.ReadLine();
-                    userOption = FilterInput(userResponse);
-
-                    if (userOption == 2 || userOption ==3)
-                    {
-                        Console.WriteLine("\r\n\r\nThank you for your visit.");
-                        System.Threading.Thread.Sleep(1500);
-                    }
-
-                    else
-                    { }
+                    client.GetClientInfo();
 
                     Console.Clear();
+                }
+                else if (userOption == 3)
+                {
+                    Console.WriteLine("\r\n\r\nThank you for your visit.");
+                    System.Threading.Thread.Sleep(1500);
+                }
 
-                } while (userOption != 2 || userOption !=3);
+                else
+                { }
 
-            } while (userOption != 2);
+                Console.Clear();
+
+            } while (userOption != 3); 
+
+
         }
 
 
