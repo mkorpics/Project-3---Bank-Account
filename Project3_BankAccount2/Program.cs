@@ -88,11 +88,11 @@ namespace Project3_BankAccount2
 
                         if (userOption == 1)
                         {
-                            checking.Deposit();
+                            checking.Deposit(checking);
                         }
                         else if (userOption == 2)
                         {
-                            savings.Deposit();
+                            savings.Deposit(savings);
                         }
                         else
                         {
@@ -122,11 +122,13 @@ namespace Project3_BankAccount2
                         }
 
                         break;
-
+                    
+                    //exit
                     case 5:
                         Exit();
                         break;
-
+                    
+                    //number outside range
                     default:
                         Console.WriteLine("\r\n\r\nI'm sorry that is not valid input.");
                         break;
@@ -196,7 +198,6 @@ namespace Project3_BankAccount2
             int.TryParse(userResponse, out userOption);
 
             return userOption;
-
         }
 
         //call this method to prompt the user to select an account

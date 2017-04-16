@@ -20,28 +20,37 @@ namespace Project3_BankAccount2
         //constructors
         public Savings()
         {
-            this.accountNumber = BankAccountNumberSavings();
-            this.balance = random.Next(999999);
+            this.balance = (random.Next(243)*2484);
             this.accountType = "Savings";
             this.minimumBalance = 100; //what should this number be?
+            BankAccountNumber();
         }
 
         //methods
+
+        //Generates random 11-digit number for account #
+        public override void BankAccountNumber()
+        {
+            this.accountNumber = Convert.ToInt64((random.Next(17000, 18000 ) * 99999)+8374865432).ToString();
+        }
 
         public override void DisplayBalance()
         {
             Console.WriteLine("\r\n\r\n\tAccount Type: " + accountType.ToUpper());
             Console.WriteLine("\r\n\tAccount Number: " + accountNumber);
             Console.WriteLine("\r\n\tBalance: " + BalanceFormat(balance));
-            Console.WriteLine("\r\n\tMinimum Balance: " + minimumBalance);
+            Console.WriteLine("\r\n\tMinimum Balance: " + BalanceFormat(minimumBalance));
             Console.WriteLine();
         }
 
         public override void Withdraw()
         {
 
+            DisplayBalance();
+
             Console.Write("\r\n\r\nAmount of withdrawal: \t");
             double withdrawal = int.Parse(Console.ReadLine());
+            //filter user input
 
             while ((balance - withdrawal) < minimumBalance)
             {
@@ -53,21 +62,21 @@ namespace Project3_BankAccount2
                 if (userResponse.ToUpper() == "NO")
                 {
                     Console.WriteLine("\r\n\r\nThank you for your visit.");
-                    System.Threading.Thread.Sleep(1500);
-                    Console.Clear();
-                    Environment.Exit(0);
+                    break;
                 }
                 else
                 {
                     Console.Clear();
+                    DisplayBalance();
                     Console.Write("\r\n\r\nAmount of withdrawal: \t");
                     withdrawal = int.Parse(Console.ReadLine());
+
+                    this.balance -= withdrawal;
+
+                    DisplayNewBalance();
                 }
             }
 
-            this.balance -= withdrawal;
-
-            DisplayNewBalance();
         }
 
 

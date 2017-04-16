@@ -25,35 +25,12 @@ namespace Project3_BankAccount2
 
         //methods
 
-        //Generates random 11-digit number for bank account #
-        public string BankAccountNumberChecking()
-        {
-            string accountNumber = "";
-
-            for (int i = 0; i < 11; i++)
-            {
-                accountNumber += random.Next(0, 9).ToString();
-            }
-
-            return accountNumber;
-        }
-
-        public string BankAccountNumberSavings()
-        {
-            string accountNumber = "";
-
-            for (int i = 0; i <= 5; i++)
-            {
-                accountNumber += random.Next(0, 9).ToString();
-            }
-
-            return accountNumber;
-        }
+        //Generates random 11-digit number for account #
+        public abstract void BankAccountNumber();
 
         //Generates random 9-digit number for bank routing #
-        public static string BankRoutingNumber()
+        public string BankRoutingNumber()
         {
-            Random random = new Random();
             string routingNumber = "";
 
             routingNumber += random.Next(999999999).ToString();
@@ -70,7 +47,7 @@ namespace Project3_BankAccount2
             return balanceFormat;
         }
 
-
+        //derived classes will write methods to display current account balances.
         public abstract void DisplayBalance();
 
         //display balance after transaction
@@ -82,25 +59,21 @@ namespace Project3_BankAccount2
             Console.WriteLine("\r\nYour current balance now is: \t" + BalanceFormat(balance));
         }
 
-        public void Deposit()
+        public void Deposit(Account type)
         {
+            type.DisplayBalance();
+
             Console.Write("\r\n\r\nAmount of deposit: \t");
-            double deposit = double.Parse(Console.ReadLine());
+            string depositInput = Console.ReadLine();
+
+            double deposit = FilterInput(depositInput);
 
             this.balance += deposit;
 
             DisplayNewBalance();
         }
 
-        public virtual void Withdraw()
-        {
-            Console.Write("\r\n\r\nAmount of withdrawal: \t");
-            double withdrawal = double.Parse(Console.ReadLine());
-
-            this.balance -= withdrawal;
-
-            DisplayNewBalance();
-        }
+        public abstract void Withdraw();
 
         public void PrintClientInfo(Client client, Savings savings, Checking checking)
         {
@@ -114,13 +87,30 @@ namespace Project3_BankAccount2
 
             Console.WriteLine("\r\n\tAccount Type: " + checking.accountType.ToUpper());
             Console.WriteLine("\r\n\tAccount Number: " + checking.accountNumber);
-            Console.WriteLine("\r\n\tBalance: " + checking.BalanceFormat(balance));
+            Console.WriteLine("\r\n\tBalance: " + checking.BalanceFormat(checking.balance));
             Console.WriteLine();
 
             Console.WriteLine("\r\n\tAccount Type: " + savings.accountType.ToUpper());
             Console.WriteLine("\r\n\tAccount Number: " + savings.accountNumber);
-            Console.WriteLine("\r\n\tBalance: " + savings.BalanceFormat(balance));
-            Console.WriteLine("\r\n\tMinimum Balance: " + savings.MinimumBalance);
+            Console.WriteLine("\r\n\tBalance: " + savings.BalanceFormat(savings.balance));
+            Console.WriteLine("\r\n\tMinimum Balance: " + savings.BalanceFormat(savings.MinimumBalance));
+        }
+
+        public double FilterInput(string moneyIn)
+        {
+            double moneyOut;
+
+            while (!double.TryParse(moneyIn, out moneyOut))
+            {
+                Console.WriteLine("\r\nI'm sorry. That is not the correct input. Please enter a valid amount.");
+                Console.Write("\r\n\r\n>  ");
+                moneyIn = Console.ReadLine();
+            }
+
+            double.TryParse(moneyIn, out moneyOut);
+
+            return moneyOut;
+
         }
 
 

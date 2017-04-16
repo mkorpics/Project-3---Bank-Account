@@ -15,20 +15,46 @@ namespace Project3_BankAccount2
         //constructors
         public Checking()
         {
-            this.accountNumber = BankAccountNumberChecking();
-            this.balance = random.Next(999999);
+            this.balance = (random.Next(894)*328);
             this.accountType = "Checking";
+            BankAccountNumber();
         }
 
         public Checking(string accountNumber)
         {
             this.accountNumber = accountNumber;
-            this.balance = random.Next(99999);
+            this.balance = (random.Next(999)*328);
             this.accountType = "Checking";
 
         }
 
         //methods
+
+        //withdraw from account
+        public override void Withdraw()
+        {
+            DisplayBalance();
+
+            Console.Write("\r\n\r\nAmount of withdrawal: \t");
+            double withdrawal = double.Parse(Console.ReadLine());
+
+            this.balance -= withdrawal;
+
+            DisplayNewBalance();
+        }
+
+        //Generates random 11-digit number for account #
+        public override void BankAccountNumber()
+        {
+            string accountNumber = "";
+
+            for (int i = 0; i < 11; i++)
+            {
+                accountNumber += random.Next(0, 9).ToString();
+            }
+
+            this.accountNumber = accountNumber;
+        }
 
         public override void DisplayBalance()
         {
