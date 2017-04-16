@@ -49,8 +49,9 @@ namespace Project3_BankAccount2
             DisplayBalance();
 
             Console.Write("\r\n\r\nAmount of withdrawal: \t");
-            double withdrawal = int.Parse(Console.ReadLine());
-            //filter user input
+            string withdrawalInput = Console.ReadLine();
+
+            double withdrawal = FilterInput(withdrawalInput);
 
             while ((balance - withdrawal) < minimumBalance)
             {
@@ -61,7 +62,7 @@ namespace Project3_BankAccount2
 
                 if (userResponse.ToUpper() == "NO")
                 {
-                    Console.WriteLine("\r\n\r\nThank you for your visit.");
+                    withdrawal = 0;
                     break;
                 }
                 else
@@ -70,13 +71,12 @@ namespace Project3_BankAccount2
                     DisplayBalance();
                     Console.Write("\r\n\r\nAmount of withdrawal: \t");
                     withdrawal = int.Parse(Console.ReadLine());
-
-                    this.balance -= withdrawal;
-
-                    DisplayNewBalance();
                 }
             }
 
+            this.balance -= withdrawal;
+
+            DisplayNewBalance();
         }
 
 

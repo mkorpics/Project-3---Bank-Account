@@ -54,8 +54,8 @@ namespace Project3_BankAccount2
         public void DisplayNewBalance()
         {
             System.Threading.Thread.Sleep(700);
-            Console.WriteLine("\r\nThank you for your transaction.");
-            System.Threading.Thread.Sleep(700);
+            Console.WriteLine("\r\n\r\nThank you for your transaction.");
+            System.Threading.Thread.Sleep(800);
             Console.WriteLine("\r\nYour current balance now is: \t" + BalanceFormat(balance));
         }
 
