@@ -42,9 +42,8 @@ namespace Project3_BankAccount2
         {
             string accountNumber = "";
 
-            for (int i = 0; i < 11; i++)
+            for (int i = 0; i <= 5; i++)
             {
-                System.Threading.Thread.Sleep(4000);
                 accountNumber += random.Next(0, 9).ToString();
             }
 
@@ -57,10 +56,7 @@ namespace Project3_BankAccount2
             Random random = new Random();
             string routingNumber = "";
 
-            for (int i = 0; i < 9; i++)
-            {
-                routingNumber += random.Next(0, 9).ToString();
-            }
+            routingNumber += random.Next(999999999).ToString();
 
             return routingNumber;
         }

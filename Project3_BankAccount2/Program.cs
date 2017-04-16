@@ -163,7 +163,7 @@ namespace Project3_BankAccount2
 
                     Console.Clear();
 
-                } while (userOption != 2 || userOption !=3); //why isn't the while loop catching
+                } while (userOption != 2 || userOption !=3);
 
             } while (userOption != 2);
         }
