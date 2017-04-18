@@ -15,22 +15,14 @@ namespace Project3_BankAccount2
         //constructors
         public Checking()
         {
-            this.balance = (random.Next(894)*328);
+            this.balance = (random.Next(894)*328); //I was having trouble getting the numbers to be different, so I did it somewhat manually.
             this.accountType = "Checking";
             BankAccountNumber();
         }
 
-        public Checking(string accountNumber)
-        {
-            this.accountNumber = accountNumber;
-            this.balance = (random.Next(999)*328);
-            this.accountType = "Checking";
-
-        }
-
         //methods
 
-        //withdraw from account
+        //call this method when the user wants to withdraw funds
         public override void Withdraw()
         {
             DisplayBalance();
@@ -58,6 +50,7 @@ namespace Project3_BankAccount2
             this.accountNumber = accountNumber;
         }
 
+        //call this method to display account information and current balance
         public override void DisplayBalance()
         {
             Console.WriteLine("\r\n\r\n\tAccount Type: " + accountType.ToUpper());

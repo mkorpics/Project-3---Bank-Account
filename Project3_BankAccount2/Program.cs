@@ -17,6 +17,7 @@ namespace Project3_BankAccount2
 
             Console.WriteLine();
 
+            //welcome page and log in / get user information
             string welcome = "Welcome!";
             Console.SetCursorPosition((Console.WindowWidth - welcome.Length) / 2, Console.CursorTop);
             Console.WriteLine(welcome);
@@ -28,7 +29,7 @@ namespace Project3_BankAccount2
 
             Console.Clear();
 
-            //declare variables
+            //declare variables (will use them to collect user's response to the menu)
             string userResponse;
             int userOption;
 
@@ -46,25 +47,29 @@ namespace Project3_BankAccount2
                 Console.Write("\r\n\r\n>  ");
                 userResponse = Console.ReadLine();
 
+                //check that user input a number and, if so, return it as an int
                 userOption = FilterInput(userResponse);
 
                 Console.Clear();
 
+                //send user to correct response based on menu choice
                 switch (userOption)
                 {
                     //view client info
                     case 1:
                         Console.WriteLine("\r\n\r\nYour Profile:");
-                        checking.PrintClientInfo(client, savings, checking);
+                        checking.PrintClientInfo(client, savings, checking); //doesn't matter which object you use to call the method
                         break;
 
                     //view account balance
                     case 2:
 
+                        //display account choices, test user input a number, and return user input as an int
                         userOption = SelectAccount();
 
                         Console.Clear();
 
+                        //send user to proper account
                         if (userOption == 1)
                         {
                             checking.DisplayBalance();
@@ -75,7 +80,7 @@ namespace Project3_BankAccount2
                         }
                         else
                         {
-                            Console.WriteLine("\r\n\r\nI'm sorry that's not a valid option.");
+                            Console.WriteLine("\r\n\r\nI'm sorry. That is not a valid option.");
                         }
 
                         break;
@@ -83,10 +88,12 @@ namespace Project3_BankAccount2
                     //deposit funds
                     case 3:
 
+                        //display account choices, test user input a number, and return user input as an int
                         userOption = SelectAccount();
 
                         Console.Clear();
 
+                        //send user to correct account
                         if (userOption == 1)
                         {
                             checking.Deposit(checking);
@@ -97,7 +104,7 @@ namespace Project3_BankAccount2
                         }
                         else
                         {
-                            Console.WriteLine("\r\n\r\nI'm sorry that's not a valid option.");
+                            Console.WriteLine("\r\n\r\nI'm sorry. That is not a valid option.");
                         }
 
                         break;
@@ -105,10 +112,12 @@ namespace Project3_BankAccount2
                     //withdraw funds
                     case 4:
 
+                        //display account choices, test user input a number, and return user input as an int
                         userOption = SelectAccount();
 
                         Console.Clear();
 
+                        //send user to correct account
                         if (userOption == 1)
                         {
                             checking.Withdraw();
@@ -119,7 +128,7 @@ namespace Project3_BankAccount2
                         }
                         else
                         {
-                            Console.WriteLine("\r\n\r\nI'm sorry that's not a valid option.");
+                            Console.WriteLine("\r\n\r\nI'm sorry. That is not a valid option.");
                         }
 
                         break;
@@ -148,7 +157,7 @@ namespace Project3_BankAccount2
 
                     //number outside range
                     default:
-                        Console.WriteLine("\r\n\r\nI'm sorry that is not valid input.");
+                        Console.WriteLine("\r\n\r\nI'm sorry. That is not a valid option.");
                         break;
                 }
 
@@ -168,6 +177,7 @@ namespace Project3_BankAccount2
         {
             int userOption;
 
+            //make sure user input is a number and cycle through loop until enter a number
             while (!int.TryParse(userResponse, out userOption))
             {
                 Console.WriteLine("\r\nI'm sorry. That is not a valid option. Which action would you like to take?");
@@ -175,14 +185,16 @@ namespace Project3_BankAccount2
                 userResponse = Console.ReadLine();
             }
 
+            //change number from string to int
             int.TryParse(userResponse, out userOption);
 
             return userOption;
         }
 
-        //call this method to prompt the user to select an account
+        //call this method to have the user select which account they would like to interact with
         public static int SelectAccount()
         {
+            //display menu
             Console.WriteLine("\r\nPlease select which account to view: ");
             Console.WriteLine("\r\n1. Checking");
             Console.WriteLine("\r\n2. Savings");
@@ -191,6 +203,7 @@ namespace Project3_BankAccount2
 
             int userOption;
 
+            //make sure user inputs a number
             while (!int.TryParse(userResponse, out userOption))
             {
                 Console.WriteLine("\r\nI'm sorry. That is not a valid option. Which account would you like to select?");
@@ -212,7 +225,7 @@ namespace Project3_BankAccount2
             Console.Clear();
         }
 
-        //call this method to exit program
+        //call this method to exit program without using the loop
         public static void Exit()
         {
             Console.WriteLine("\r\n\r\nThank you for your visit.");

@@ -12,7 +12,7 @@ namespace Project3_BankAccount2
         private string firstName;
         private string lastName;
         private string userName;
-        //FILL IN OTHER FIELDS
+        //FILL IN OTHER FIELDS?????
 
         //properties
         public string FirstName

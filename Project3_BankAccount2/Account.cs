@@ -15,7 +15,7 @@ namespace Project3_BankAccount2
         protected string accountType;
         protected Random random = new Random();
 
-        //properties?
+        //properties
 
         //constructor
         public Account()
@@ -38,7 +38,7 @@ namespace Project3_BankAccount2
             return routingNumber;
         }
 
-        //formats balance in $ currency
+        //formats balance to $ currency
         public string BalanceFormat(double balance)
         {
             string balanceString = balance.ToString();
@@ -56,9 +56,10 @@ namespace Project3_BankAccount2
             System.Threading.Thread.Sleep(700);
             Console.WriteLine("\r\n\r\nThank you for your transaction.");
             System.Threading.Thread.Sleep(800);
-            Console.WriteLine("\r\nYour current balance now is: \t" + BalanceFormat(balance));
+            Console.WriteLine("\r\nYour current balance is: \t" + BalanceFormat(balance));
         }
 
+        //call this method when the user wants to make a deposit
         public void Deposit(Account type)
         {
             type.DisplayBalance();
@@ -73,8 +74,10 @@ namespace Project3_BankAccount2
             DisplayNewBalance();
         }
 
+        //derived classes will create methods for the withdrawal of funds
         public abstract void Withdraw();
 
+        //call this method to display client information (both personal and account information)
         public void PrintClientInfo(Client client, Savings savings, Checking checking)
         {
             Console.WriteLine("\r\n\r\n\r\n\tLast Name: " + client.LastName);
@@ -96,13 +99,14 @@ namespace Project3_BankAccount2
             Console.WriteLine("\r\n\tMinimum Balance: " + savings.BalanceFormat(savings.MinimumBalance));
         }
 
+        //call this method to make sure user enters a number
         public double FilterInput(string moneyIn)
         {
             double moneyOut;
 
             while (!double.TryParse(moneyIn, out moneyOut))
             {
-                Console.WriteLine("\r\nI'm sorry. That is not the correct input. Please enter a valid amount.");
+                Console.WriteLine("\r\nI'm sorry. That is not an option. Please enter a valid amount.");
                 Console.Write("\r\n\r\n>  ");
                 moneyIn = Console.ReadLine();
             }

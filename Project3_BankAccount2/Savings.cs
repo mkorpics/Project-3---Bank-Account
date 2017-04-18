@@ -31,9 +31,10 @@ namespace Project3_BankAccount2
         //Generates random 11-digit number for account #
         public override void BankAccountNumber()
         {
-            this.accountNumber = Convert.ToInt64((random.Next(17000, 18000 ) * 99999)+8374865432).ToString();
+            this.accountNumber = Convert.ToInt64((random.Next(17000, 18000 ) * 99999)+8374865432).ToString(); //having trouble getting numbers to differ, so I did it somewhat manually
         }
 
+        //call this method to display account information and current balance
         public override void DisplayBalance()
         {
             Console.WriteLine("\r\n\r\n\tAccount Type: " + accountType.ToUpper());
@@ -43,6 +44,7 @@ namespace Project3_BankAccount2
             Console.WriteLine();
         }
 
+        //call this method when the user wants to withdraw funds
         public override void Withdraw()
         {
 
@@ -53,6 +55,7 @@ namespace Project3_BankAccount2
 
             double withdrawal = FilterInput(withdrawalInput);
 
+            //make sure user can't deplete account beyond minimum balance (if so, offer chance to withdraw a valid amount)
             while ((balance - withdrawal) < minimumBalance)
             {
                 Console.WriteLine("\r\n\r\nI'm sorry, but this amount reduces your balance beyond the minimum amount.");
