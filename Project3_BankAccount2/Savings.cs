@@ -22,7 +22,7 @@ namespace Project3_BankAccount2
         {
             this.balance = (random.Next(243)*2484);
             this.accountType = "Savings";
-            this.minimumBalance = 100; //what should this number be?
+            this.minimumBalance = 100;
             BankAccountNumber();
         }
 
